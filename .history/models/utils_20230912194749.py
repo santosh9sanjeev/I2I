@@ -85,7 +85,7 @@ def eval_loader(model, test_loader_a, test_loader_b, output_directory, opt):
         acc_loader = test_loader_a
 
     for it, (data, acc_data) in enumerate(zip(test_loader,acc_loader)):
-        fake = model.translate(data['A'].cuda())
+        fake = model.translate(data['A'].cuda(), acc_data['A'].cuda())
         path_fake = os.path.join(fake_dir, os.path.basename(data['A_paths'][0]).replace('jpg', 'png'))
         im = tensor2im(fake)
         save_image_numpy(im, path_fake)

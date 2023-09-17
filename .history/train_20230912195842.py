@@ -18,10 +18,6 @@ if __name__ == '__main__':
     fix_b = torch.stack([test_loader_b.dataset[i]['A'] for i in range(opt.display_size)]).cuda()
 
     model = create_model(opt)      # create a model given opt.model and other options
-    if opt.epoch:
-        print(f'Loading model from epoch {opt.epoch}')
-        model.load_networks(opt.epoch)
-        # opt.epoch_count = opt.epoch
     print('The number of training images = %d' % dataset_size)
 
     visualizer = Visualizer(opt)   # create a visualizer that display/save images and plots
@@ -35,7 +31,7 @@ if __name__ == '__main__':
     print(f'opt.epoch_count: {opt.epoch_count}')
     print(f'opt.n_epochs: {opt.n_epochs}')
     print(f'opt.n_epochs_decay: {opt.n_epochs_decay}')
-
+    
     for epoch in range(opt.epoch_count, opt.n_epochs + opt.n_epochs_decay + 1):    # outer loop for different epochs; we save the model by <epoch_count>, <epoch_count>+<save_latest_freq>
         epoch_start_time = time.time()  # timer for entire epoch
         iter_data_time = time.time()    # timer for data loading per iteration
@@ -78,6 +74,8 @@ if __name__ == '__main__':
                 model.save_networks(save_suffix)
 
             iter_data_time = time.time()
+
+            break
 
         if epoch % (opt.eval_epoch_freq) == 0 or epoch == 1:  # display images on visdom and save images to a HTML file
             images = model.interpolation(fix_a, fix_b)

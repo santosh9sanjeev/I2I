@@ -21,7 +21,7 @@ if __name__ == '__main__':
     if opt.epoch:
         print(f'Loading model from epoch {opt.epoch}')
         model.load_networks(opt.epoch)
-        # opt.epoch_count = opt.epoch
+        opt.epoch_count = opt.epoch
     print('The number of training images = %d' % dataset_size)
 
     visualizer = Visualizer(opt)   # create a visualizer that display/save images and plots

@@ -18,10 +18,8 @@ if __name__ == '__main__':
     fix_b = torch.stack([test_loader_b.dataset[i]['A'] for i in range(opt.display_size)]).cuda()
 
     model = create_model(opt)      # create a model given opt.model and other options
-    if opt.epoch:
-        print(f'Loading model from epoch {opt.epoch}')
-        model.load_networks(opt.epoch)
-        # opt.epoch_count = opt.epoch
+    if opt.epoch > 0:
+        model.load_networks(opt.resume_epoch)
     print('The number of training images = %d' % dataset_size)
 
     visualizer = Visualizer(opt)   # create a visualizer that display/save images and plots

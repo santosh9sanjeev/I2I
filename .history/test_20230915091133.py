@@ -49,7 +49,6 @@ if __name__ == '__main__':
     opt.no_flip = True    # no flip; comment this line if results on flipped images are needed.
     opt.display_id = -1   # no visdom display; the test code saves the results to a HTML file.
     opt.checkpoints_dir = "/home/aneeshashmi/generative/santa/checkpoints/debug/CrossModa_pt_AtoB/lam0.01_layers0,3,6,10,14_dim8_rec5_idt5.0_pool0_noise1.0_kl0.01"
-    # opt.pretrained_name = 
     dataset = create_dataset(opt)  # create a dataset given opt.dataset_mode and other options
     train_dataset = create_dataset(util.copyconf(opt, phase="train"))
     model = create_model(opt)      # create a model given opt.model and other options
